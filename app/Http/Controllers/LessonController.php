@@ -13,8 +13,8 @@ class LessonController extends Controller
      */
     public function index()
     {
-        //
-        $lessons = Lessons::all();
+        $lessons = DB::table('lessons')
+            ->join('admins', 'lessons.userCreatedId', '=', 'admins.id')->get();
         return response()->json($lessons);
     }
 
