@@ -14,7 +14,9 @@ class LessonController extends Controller
     public function index()
     {
         $lessons = DB::table('lessons')
-            ->join('admins', 'lessons.userCreatedId', '=', 'admins.id')->get();
+            ->join('admins', 'lessons.userCreatedId', '=', 'admins.id')
+            ->select(array('answerTime', 'lessons.created_at', 'lessonName', 'name', 'lessons.updated_at', 'userCreatedId', 'username', 'admins.id as adminId', 'lessons.id'))
+            ->get();
         return response()->json($lessons);
     }
 
