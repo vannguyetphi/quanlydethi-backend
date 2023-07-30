@@ -28,6 +28,7 @@ Route::resource('lessons', LessonController::class);
 Route::resource('questions', QuestionController::class);
 Route::resource('subjects', SubjectController::class);
 Route::get('/questionDetails/getQuestionDetails', [QuestionDetailController::class, 'getQuestionDetails']);
+Route::get('/questionDetails/getExamSubjectQuestions', [QuestionDetailController::class, 'getExamSubjectQuestions']);
 Route::resource('questionDetails', QuestionDetailController::class);
 Route::post('/subjects/addToExam', [ExamDetailController::class, 'addToExam']);
 Route::get('/exams/getSubjects', [ExamDetailController::class, 'getSubjects']);

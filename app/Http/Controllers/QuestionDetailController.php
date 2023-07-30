@@ -48,6 +48,19 @@ class QuestionDetailController extends Controller
             'data' => $subjects,
         ]);
     }
+    public function getExamSubjectQuestions(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $questions = DB::table('question_details')
+            ->where('examId', '=', $request->get('examId'))
+            ->where('subjectId', '=', $request->get('subjectId'))
+            ->join('questions', 'question_details.questionId', '=', 'questions.id')
+            ->join('subjects', 'question_details.subjectId', '=', 'subjects.id')->get();
+        return response()->json((object)[
+            'message' => 'success',
+            'total' => sizeof($questions),
+            'data' => $questions,
+        ]);
+    }
 
     /**
      * Display the specified resource.

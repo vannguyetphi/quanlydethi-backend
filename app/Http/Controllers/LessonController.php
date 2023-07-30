@@ -45,9 +45,18 @@ class LessonController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): \Illuminate\Http\JsonResponse
     {
-        //
+        $lesson = Lessons::find($id);
+        if (!$lesson) {
+            return response()->json((object)[
+                'message' => 'failed',
+            ], 404);
+        }
+        return response()->json((object)[
+            'message' => 'success',
+            'data' => $lesson,
+        ]);
     }
 
     /**
