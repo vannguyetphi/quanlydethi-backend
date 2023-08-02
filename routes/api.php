@@ -5,6 +5,7 @@ use App\Http\Controllers\ExamDetailController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuestionDetailController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +34,5 @@ Route::resource('questionDetails', QuestionDetailController::class);
 Route::post('/subjects/addToExam', [ExamDetailController::class, 'addToExam']);
 Route::get('/exams/getSubjects', [ExamDetailController::class, 'getSubjects']);
 Route::post('/admins/authenticate', [AdminController::class, 'auth']);
+
+Route::resource('students', StudentController::class);
