@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Students;
+use App\Models\AnswerDetail;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class AnswerDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,26 +28,19 @@ class StudentController extends Controller
      */
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        $student = Students::create($request->all());
+        $record = AnswerDetail::create($request->all());
         return response()->json((object)[
             'message' => 'success',
-            'data' => $student,
+            'data' => $record,
         ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id): \Illuminate\Http\JsonResponse
+    public function show(string $id)
     {
-
-        $student = Students::select('fullName', 'candidateNumber',  'class_rooms.name as className', 'students.id as id')
-            ->join('class_rooms', 'class_rooms.code', '=', 'students.classId')
-            ->find($id);
-        return response()->json((object)[
-            'message' => 'success',
-            'data' => $student,
-        ]);
+        //
     }
 
     /**

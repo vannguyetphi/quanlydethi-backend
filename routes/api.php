@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AnswerDetailController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\ExamDetailController;
 use App\Http\Controllers\LessonController;
@@ -38,3 +39,4 @@ Route::post('/admins/authenticate', [AdminController::class, 'auth']);
 
 Route::resource('students', StudentController::class);
 Route::resource('classrooms', ClassroomController::class);
+Route::resource('answerDetails', AnswerDetailController::class);
