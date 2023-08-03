@@ -38,9 +38,16 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): \Illuminate\Http\JsonResponse
     {
-        //
+
+        $student = Students::select('fullName', 'candidateNumber',  'class_rooms.name as className')
+            ->join('class_rooms', 'class_rooms.code', '=', 'students.classId')
+            ->find($id);
+        return response()->json((object)[
+            'message' => 'success',
+            'data' => $student,
+        ]);
     }
 
     /**
