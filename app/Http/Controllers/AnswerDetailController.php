@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AnswerDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AnswerDetailController extends Controller
 {
@@ -32,6 +33,31 @@ class AnswerDetailController extends Controller
         return response()->json((object)[
             'message' => 'success',
             'data' => $record,
+        ]);
+    }
+
+    public function getStudentResult(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $records = DB::table('answer_details')
+            ->where('studentId', '=', $request->get('studentId'))
+            ->join('subjects', 'answer_details.subjectId', '=', 'subjects.id')
+            ->join('questions', 'answer_details.questionId', '=', 'questions.id')
+            ->join('lessons', 'answer_details.examId', '=', 'lessons.id')
+            ->select(
+                'questions.answer as questionAnswer',
+                'subjects.name as subjectName',
+                'answer_details.answer as studentAnswer',
+                'lessonName',
+                'subjects.id as subjectId',
+                'subjects.name as subjectName',
+                'questions.title as questionTitle',
+                'answer_details.id as id',
+            )
+            ->get()
+            ->groupBy('subjectId');
+        return response()->json((object)[
+            'message' => 'success',
+            'data' => $records,
         ]);
     }
 

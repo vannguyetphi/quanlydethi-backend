@@ -39,4 +39,5 @@ Route::post('/admins/authenticate', [AdminController::class, 'auth']);
 
 Route::resource('students', StudentController::class);
 Route::resource('classrooms', ClassroomController::class);
+Route::get('/answerDetails/getStudentResult', [AnswerDetailController::class, 'getStudentResult']);
 Route::resource('answerDetails', AnswerDetailController::class);
