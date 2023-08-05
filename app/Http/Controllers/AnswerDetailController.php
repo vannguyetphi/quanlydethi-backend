@@ -51,10 +51,16 @@ class AnswerDetailController extends Controller
                 'subjects.id as subjectId',
                 'subjects.name as subjectName',
                 'questions.title as questionTitle',
+                'questions.content as questionContent',
+                'questions.A as answerA',
+                'questions.B as answerB',
+                'questions.C as answerC',
+                'questions.D as answerD',
                 'answer_details.id as id',
+                'answer_details.examId as examId',
             )
             ->get()
-            ->groupBy('subjectId');
+            ->groupBy('examId');
         return response()->json((object)[
             'message' => 'success',
             'data' => $records,
